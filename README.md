@@ -1,5 +1,5 @@
 # DAta Related Porjects
-This project includes all the projects that I've done during undergradute program
+This Repo includes all the projects that I've done during undergradute program
 
 A. data mining
 

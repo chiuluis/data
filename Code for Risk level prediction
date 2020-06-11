@@ -3,17 +3,17 @@
 
 
 
-> IBMrange=read.csv("C:\\Users\\ \\Desktop\\LCMrange.csv")
-> head(IBMrange)
-       Date IBMrange Lag1 Lag2
+> LCMrange=read.csv("C:\\Users\\ \\Desktop\\LCMrange.csv")
+> head(LCMrange)
+       Date LCMrange Lag1 Lag2
 1  1/5/2006     1.65 1.17 2.74
 2  1/6/2006     1.62 1.65 2.17
 3  1/9/2006     0.87 1.62 2.65
 4 1/10/2006     1.00 0.87 2.62
 5 1/11/2006     1.41 1.00 1.87
 6 1/12/2006     0.56 1.41 2.00
-> tail(IBMrange)
-          Date IBMrange Lag1 Lag2
+> tail(LCMrange)
+          Date LCMrange Lag1 Lag2
 2534 1/29/2016     1.83 1.82 3.72
 2535  2/1/2016     1.58 1.83 2.82
 2536  2/2/2016     1.50 1.58 2.83
@@ -23,8 +23,8 @@
 > sample(5,5)
 [1] 5 3 2 4 1
 > Shuffle=sample(2539,2539)
-> IBMrange[Shuffle[1:6],]
-           Date IBMrange Lag1 Lag2
+> LCMrange[Shuffle[1:6],]
+           Date LCMrange Lag1 Lag2
 2420  8/17/2015     1.99 1.63 2.77
 609    6/6/2008     3.40 1.84 3.05
 1158  8/11/2010     1.23 1.72 2.94
@@ -33,30 +33,30 @@
 719  11/11/2008     4.04 5.36 3.46
 > InSample=Shuffle[1:1200]
 > OutSample=Shuffle[1201:2539]
-> X.IBM=IBMrange[,3:4]
-> Y.IBM=IBMrange[,2]
-> median(Y.IBM)
+> X.LCM=LCMrange[,3:4]
+> Y.LCM=LCMrange[,2]
+> median(Y.LCM)
 [1] 1.98
-> Y.IBM[Y.IBM>1.98]="HighRisk"
-> Y.IBM[Y.IBM<=1.98]="LowRisk"
-> Y.IBM[1:6]
+> Y.LCM[Y.LCM>1.98]="HighRisk"
+> Y.LCM[Y.LCM<=1.98]="LowRisk"
+> Y.LCM[1:6]
 [1] "LowRisk" "LowRisk" "LowRisk" "LowRisk" "LowRisk" "LowRisk"
-> as.factor(Y.IBM[1:6])
+> as.factor(Y.LCM[1:6])
 [1] LowRisk LowRisk LowRisk LowRisk LowRisk LowRisk
 Levels: LowRisk
-> Y.IBM = as.factor(Y.IBM)
-> TrainX.IBM=X.IBM[InSample,]
-> TrainY.IBM=Y.IBM[InSample,]
-Error in `[.default`(Y.IBM, InSample, ) : incorrect number of dimensions
-> TrainY.IBM=Y.IBM[InSample]
-> TestX.IBM=X.IBM[OutSample,]
-> TestY.IBM=Y.IBM[OutSample]
-> knn.pred = knn(TrainX.IBM, TestX.IBM, TrainY.IBM, 25)
-> table(knn.pred,TestY.IBM)
-          TestY.IBM
+> Y.LCM = as.factor(Y.LCM)
+> TrainX.LCM=X.LCM[InSample,]
+> TrainY.LCM=Y.LCM[InSample,]
+Error in `[.default`(Y.LCM, InSample, ) : incorrect number of dimensions
+> TrainY.LCM=Y.LCM[InSample]
+> TestX.LCM=X.LCM[OutSample,]
+> TestY.LCM=Y.LCM[OutSample]
+> knn.pred = knn(TrainX.LCM, TestX.LCM, TrainY.LCM, 25)
+> table(knn.pred,TestY.LCM)
+          TestY.LCM
 knn.pred   HighRisk LowRisk
   HighRisk      486     193
   LowRisk       213     447
-> table.out = table(knn.pred,TestY.IBM)
+> table.out = table(knn.pred,TestY.LCM)
 > (table.out[1,1]+table.out[2,2])/sum(table.out)
 [1] 0.6967886
